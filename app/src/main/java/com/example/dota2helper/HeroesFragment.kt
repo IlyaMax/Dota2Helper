@@ -16,11 +16,6 @@ class HeroesFragment : Fragment() {
         val view = inflater.inflate(R.layout.heroes_fragment, container, false)
         tabLayout = view.findViewById(R.id.tabs);
         viewPager = view.findViewById(R.id.viewPager)
-//        tabLayout!!.addTab(tabLayout!!.newTab().setText("Home"))
-//        tabLayout!!.addTab(tabLayout!!.newTab().setText("Sport"))
-//        tabLayout!!.addTab(tabLayout!!.newTab().setText("Movie"))
-//        tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
-
         viewPager!!.adapter = PageAdapter(fragmentManager,tabLayout!!.tabCount)
         viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
