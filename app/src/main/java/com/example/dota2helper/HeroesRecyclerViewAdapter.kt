@@ -21,18 +21,16 @@ class HeroesRecyclerViewAdapter(var heroesList: List<Hero.Entity>) : RecyclerVie
 
     override fun onBindViewHolder(holder: HeroesViewHolder, position: Int) {
         //see HEROES section to understand the way I get images https://dev.dota2.com/showthread.php?t=58317
-        Log.d("DEBUG","was in onBind")
         val size = "lg.png"
+        //Log.d("DEBUG",String.format("http://cdn.dota2.com/apps/dota2/images/heroes/%s_%s",heroesList.get(position).name.removePrefix("npc_dota_hero_"),size))
+
         Picasso.get()
-            .load(String.format("http://cdn.dota2.com/apps/dota2/images/heroes/%s_%s",heroesList.get(position).name.removePrefix("npc_hero_dota_"),size))
+            .load(String.format("http://cdn.dota2.com/apps/dota2/images/heroes/%s_%s",heroesList.get(position).name.removePrefix("npc_dota_hero_"),size))
             .into(holder.ivHero)
     }
 
     class HeroesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var ivHero:ImageView? = null
-        init {
-            ivHero = itemView.findViewById(R.id.ivHero)
-        }
+        var ivHero: ImageView = itemView.findViewById(R.id.ivHero)
     }
 
 }
