@@ -1,13 +1,11 @@
-package com.example.dota2helper
+package com.example.dota2helper.core.retrofit
 
-import io.reactivex.Observable
+import com.example.dota2helper.data.entities.Hero
 import retrofit2.Retrofit
 import retrofit2.Call
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
-import java.util.*
 
 interface OpenDotaApiService {
     @GET("heroes")

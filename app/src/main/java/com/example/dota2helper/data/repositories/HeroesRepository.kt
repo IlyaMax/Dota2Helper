@@ -1,7 +1,9 @@
-package com.example.dota2helper
+package com.example.dota2helper.data.repositories
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.dota2helper.core.retrofit.OpenDotaApiService
+import com.example.dota2helper.data.entities.Hero
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

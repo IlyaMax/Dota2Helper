@@ -1,13 +1,12 @@
-package com.example.dota2helper
+package com.example.dota2helper.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
-import kotlinx.android.synthetic.main.item_hero.view.*
-import android.text.method.TextKeyListener.clear
-import android.util.Log
+import com.example.dota2helper.R
+import com.example.dota2helper.data.entities.Hero
 import com.squareup.picasso.Picasso
 
 

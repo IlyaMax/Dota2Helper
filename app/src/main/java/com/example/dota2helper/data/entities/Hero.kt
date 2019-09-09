@@ -1,4 +1,4 @@
-package com.example.dota2helper
+package com.example.dota2helper.data.entities
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
