@@ -10,7 +10,7 @@ import com.example.dota2helper.data.entities.Hero
 import com.squareup.picasso.Picasso
 
 
-class HeroesRecyclerViewAdapter(var heroesList: List<Hero.Entity>) : RecyclerView.Adapter<HeroesRecyclerViewAdapter.HeroesViewHolder>() {
+class HeroesRecyclerViewAdapter(var heroesList: List<Hero>) : RecyclerView.Adapter<HeroesRecyclerViewAdapter.HeroesViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroesViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_hero, parent, false)
         return HeroesViewHolder(itemView)

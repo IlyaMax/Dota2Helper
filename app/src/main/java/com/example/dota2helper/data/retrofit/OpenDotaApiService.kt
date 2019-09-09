@@ -1,4 +1,4 @@
-package com.example.dota2helper.core.retrofit
+package com.example.dota2helper.data.retrofit
 
 import com.example.dota2helper.data.entities.Hero
 import retrofit2.Retrofit
@@ -9,7 +9,7 @@ import retrofit2.http.GET
 
 interface OpenDotaApiService {
     @GET("heroes")
-    fun getHeroes(): Call<List<Hero.Entity>>
+    fun getHeroes(): Call<List<Hero>>
 
     companion object Factory {
         fun create(): OpenDotaApiService {

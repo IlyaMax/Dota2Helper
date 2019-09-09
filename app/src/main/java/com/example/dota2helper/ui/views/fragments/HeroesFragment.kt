@@ -4,23 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.example.dota2helper.ui.adapters.PageAdapter
 import com.example.dota2helper.R
+import com.example.dota2helper.common.NetworkState
+import com.example.dota2helper.ui.viewmodels.HeroesViewModel
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.heroes_fragment.*
 
 
 class HeroesFragment : Fragment() {
-    var tabLayout: TabLayout? = null
-    var viewPager: ViewPager? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.heroes_fragment, container, false)
-        tabLayout = view.findViewById(R.id.tabs);
-        viewPager = view.findViewById(R.id.viewPager)
-        viewPager!!.adapter = PageAdapter(fragmentManager, tabLayout!!.tabCount)
-        viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-        tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        return inflater.inflate(R.layout.heroes_fragment, container, false)
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if(!NetworkState.isNetworkConnected(context!!))
+        {
+            Toast.makeText(context,"No internet found. Showing cached list in the view", Toast.LENGTH_LONG).show()
+        }
+        viewPager!!.adapter = PageAdapter(fragmentManager, tabs!!.tabCount)
+        viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+        tabs!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPager!!.currentItem = tab.position
             }
@@ -31,6 +40,5 @@ class HeroesFragment : Fragment() {
 
             }
         })
-        return view
     }
 }
