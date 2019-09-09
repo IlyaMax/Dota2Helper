@@ -36,8 +36,7 @@ class AttributeHeroesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = GridLayoutManager(context,3)
         heroesViewModel = ViewModelProviders.of(this).get(HeroesViewModel::class.java)
-        heroesViewModel!!.init()
-        heroesViewModel!!.getHeroesRepository()!!.observe(this, Observer {
+        heroesViewModel!!.heroesData.observe(this, Observer {
             //            Log.d("DEBUG",attribute)
 //            Log.d("DEBUG",it.toString())
             progressBar.visibility = View.GONE
