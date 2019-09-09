@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dota2helper.ui.adapters.HeroesRecyclerViewAdapter
 import com.example.dota2helper.ui.viewmodels.HeroesViewModel
 import com.example.dota2helper.R
-
-
+import kotlinx.android.synthetic.main.attribute_heroes_fragment.*
 
 
 class AttributeHeroesFragment : Fragment() {
-    private var recyclerView: RecyclerView? = null
+
+
     private var heroesViewModel: HeroesViewModel? = null
 
     companion object {
@@ -30,20 +30,22 @@ class AttributeHeroesFragment : Fragment() {
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.attribute_heroes_fragment, container, false)
-        recyclerView = view.findViewById(R.id.recyclerView)
-        val layoutManager = GridLayoutManager(context,3)
-        recyclerView!!.layoutManager = layoutManager
+        return inflater.inflate(R.layout.attribute_heroes_fragment, container, false)
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        recyclerView.layoutManager = GridLayoutManager(context,3)
         heroesViewModel = ViewModelProviders.of(this).get(HeroesViewModel::class.java)
         heroesViewModel!!.init()
         heroesViewModel!!.getHeroesRepository()!!.observe(this, Observer {
-//            Log.d("DEBUG",attribute)
+            //            Log.d("DEBUG",attribute)
 //            Log.d("DEBUG",it.toString())
-            recyclerView!!.adapter =
+            progressBar.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+            recyclerView.adapter =
                 HeroesRecyclerViewAdapter(it.filter { hero -> hero.attribute == arguments!!.getString("attribute") })
-            recyclerView!!.adapter!!.notifyDataSetChanged()
+            recyclerView.adapter!!.notifyDataSetChanged()
 
         })
-        return view
     }
 }
