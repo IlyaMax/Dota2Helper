@@ -9,7 +9,7 @@ import com.example.dota2helper.data.entities.Hero
 interface HeroDao {
 
     @Query("SELECT * FROM hero WHERE hero.attribute=:attribute")
-    fun getHeroesByAttribute(attribute:String) : LiveData<List<Hero>>
+    fun getHeroesByAttribute(attribute: String): LiveData<List<Hero>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllHeroes(heroesList: List<Hero>)

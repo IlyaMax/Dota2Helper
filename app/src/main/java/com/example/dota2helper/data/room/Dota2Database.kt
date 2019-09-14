@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.dota2helper.data.entities.Hero
 
 @Database(entities = [(Hero::class)], version = 1)
-abstract class Dota2Database : RoomDatabase(){
+abstract class Dota2Database : RoomDatabase() {
 
-    abstract fun heroDao() : HeroDao
+    abstract fun heroDao(): HeroDao
 }

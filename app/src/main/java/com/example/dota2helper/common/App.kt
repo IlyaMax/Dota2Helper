@@ -12,6 +12,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        database = Room.databaseBuilder(applicationContext, Dota2Database::class.java, "heroes_db").fallbackToDestructiveMigration().build()
+        database = Room.databaseBuilder(applicationContext, Dota2Database::class.java, "heroes_db")
+            .fallbackToDestructiveMigration().build()
     }
 }

@@ -33,14 +33,15 @@ class AttributeHeroesFragment : Fragment() {
             return f
         }
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.attribute_heroes_fragment, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         heroesViewModel = ViewModelProviders.of(this).get(HeroesViewModel::class.java)
-        if(NetworkState.isNetworkConnected(context!!))
-        {
+        if (NetworkState.isNetworkConnected(context!!)) {
             heroesViewModel.getHeroesFromAPIAndStore()
         }
         heroesViewModel.getHeroesFromDBByAttribute(arguments?.getString("attribute")!!).observe(this, Observer {

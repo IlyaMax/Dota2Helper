@@ -10,7 +10,8 @@ import com.example.dota2helper.data.entities.Hero
 import com.squareup.picasso.Picasso
 
 
-class HeroesRecyclerViewAdapter(var heroesList: List<Hero>) : RecyclerView.Adapter<HeroesRecyclerViewAdapter.HeroesViewHolder>() {
+class HeroesRecyclerViewAdapter(var heroesList: List<Hero>) :
+    RecyclerView.Adapter<HeroesRecyclerViewAdapter.HeroesViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroesViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_hero, parent, false)
         return HeroesViewHolder(itemView)
@@ -24,7 +25,13 @@ class HeroesRecyclerViewAdapter(var heroesList: List<Hero>) : RecyclerView.Adapt
         //Log.d("DEBUG",String.format("http://cdn.dota2.com/apps/dota2/images/heroes/%s_%s",heroesList.get(position).name.removePrefix("npc_dota_hero_"),size))
 
         Picasso.get()
-            .load(String.format("http://cdn.dota2.com/apps/dota2/images/heroes/%s_%s",heroesList.get(position).name.removePrefix("npc_dota_hero_"),size))
+            .load(
+                String.format(
+                    "http://cdn.dota2.com/apps/dota2/images/heroes/%s_%s",
+                    heroesList.get(position).name.removePrefix("npc_dota_hero_"),
+                    size
+                )
+            )
             .into(holder.ivHero)
     }
 

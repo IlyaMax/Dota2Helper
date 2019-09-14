@@ -21,11 +21,11 @@ class HeroesFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.heroes_fragment, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(!NetworkState.isNetworkConnected(context!!))
-        {
-            Toast.makeText(context,"No internet found. Showing cached list in the view", Toast.LENGTH_LONG).show()
+        if (!NetworkState.isNetworkConnected(context!!)) {
+            Toast.makeText(context, "No internet found. Showing cached list in the view", Toast.LENGTH_LONG).show()
         }
         viewPager!!.adapter = PageAdapter(fragmentManager, tabs!!.tabCount)
         viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
@@ -33,9 +33,11 @@ class HeroesFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPager!!.currentItem = tab.position
             }
+
             override fun onTabUnselected(tab: TabLayout.Tab) {
 
             }
+
             override fun onTabReselected(tab: TabLayout.Tab) {
 
             }

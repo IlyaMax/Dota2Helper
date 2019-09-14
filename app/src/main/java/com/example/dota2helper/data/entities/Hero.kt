@@ -1,4 +1,5 @@
 package com.example.dota2helper.data.entities
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose

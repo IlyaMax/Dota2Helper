@@ -12,16 +12,16 @@ import retrofit2.Response
 import android.os.Handler
 
 
-object HeroesRepository{
+object HeroesRepository {
     private val apiService = OpenDotaApiService.create()
-    fun getHeroesFromDBByAttribute(attribute:String): LiveData<List<Hero>> {
+    fun getHeroesFromDBByAttribute(attribute: String): LiveData<List<Hero>> {
         return App.database.heroDao().getHeroesByAttribute(attribute)
     }
 
     fun getHeroesFromAPIAndStore() {
-        apiService.getHeroes().enqueue(object : Callback<List<Hero>>{
+        apiService.getHeroes().enqueue(object : Callback<List<Hero>> {
             override fun onFailure(call: Call<List<Hero>>, t: Throwable) {
-                Log.d("DEBUG","Failed to get heroes")
+                Log.d("DEBUG", "Failed to get heroes")
             }
 
             override fun onResponse(call: Call<List<Hero>>, response: Response<List<Hero>>) {
