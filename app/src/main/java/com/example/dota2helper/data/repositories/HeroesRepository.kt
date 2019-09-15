@@ -10,6 +10,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.os.Handler
+import io.reactivex.Completable
+import io.reactivex.Completable.fromCallable
+import io.reactivex.Single
 
 
 object HeroesRepository {
@@ -18,22 +21,11 @@ object HeroesRepository {
         return App.database.heroDao().getHeroesByAttribute(attribute)
     }
 
-    fun getHeroesFromAPIAndStore() {
-        apiService.getHeroes().enqueue(object : Callback<List<Hero>> {
-            override fun onFailure(call: Call<List<Hero>>, t: Throwable) {
-                Log.d("DEBUG", "Failed to get heroes")
-            }
+    fun getHeroesFromApi(): Single<List<Hero>> {
+        return apiService.getHeroes()
+    }
 
-            override fun onResponse(call: Call<List<Hero>>, response: Response<List<Hero>>) {
-                if (response.isSuccessful) {
-                    //Log.d("DEBUG",response.body().toString())
-                    Thread(Runnable {
-                        App.database.heroDao().insertAllHeroes(response.body()!!)
-                    }).start()
-
-                }
-            }
-
-        })
+    fun saveHeroesToDb(heroes: List<Hero>?):Completable {
+        return App.database.heroDao().insertAllHeroes(heroes!!)
     }
 }

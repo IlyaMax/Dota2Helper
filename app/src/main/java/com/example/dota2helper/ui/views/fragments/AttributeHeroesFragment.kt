@@ -43,10 +43,13 @@ class AttributeHeroesFragment : Fragment() {
         heroesViewModel = ViewModelProviders.of(this).get(HeroesViewModel::class.java)
         if (NetworkState.isNetworkConnected(context!!)) {
             heroesViewModel.getHeroesFromAPIAndStore()
+            heroesViewModel.loading.observe(this,Observer{
+                progressBar.visibility = if (it) View.VISIBLE else View.GONE
+                recyclerView.visibility = if (!it) View.VISIBLE else View.GONE
+            })
         }
+
         heroesViewModel.getHeroesFromDBByAttribute(arguments?.getString("attribute")!!).observe(this, Observer {
-            progressBar.visibility = View.GONE
-            recyclerView.visibility = View.VISIBLE
             recyclerView.layoutManager = GridLayoutManager(context, 3)
             recyclerView.adapter =
                 HeroesRecyclerViewAdapter(it)

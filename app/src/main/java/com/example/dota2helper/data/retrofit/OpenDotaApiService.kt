@@ -1,6 +1,7 @@
 package com.example.dota2helper.data.retrofit
 
 import com.example.dota2helper.data.entities.Hero
+import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.Call
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -9,7 +10,7 @@ import retrofit2.http.GET
 
 interface OpenDotaApiService {
     @GET("heroes")
-    fun getHeroes(): Call<List<Hero>>
+    fun getHeroes(): Single<List<Hero>>
 
     companion object Factory {
         fun create(): OpenDotaApiService {

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.dota2helper.data.entities.Hero
+import io.reactivex.Completable
 
 @Dao
 interface HeroDao {
@@ -12,5 +13,5 @@ interface HeroDao {
     fun getHeroesByAttribute(attribute: String): LiveData<List<Hero>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllHeroes(heroesList: List<Hero>)
+    fun insertAllHeroes(heroesList: List<Hero>): Completable
 }
