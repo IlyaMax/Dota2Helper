@@ -17,8 +17,8 @@ import io.reactivex.Single
 
 object HeroesRepository {
     private val apiService = OpenDotaApiService.create()
-    fun getHeroesFromDBByAttribute(attribute: String): LiveData<List<Hero>> {
-        return App.database.heroDao().getHeroesByAttribute(attribute)
+    fun getHeroesFromDB(): LiveData<List<Hero>> {
+        return App.database.heroDao().getHeroes()
     }
 
     fun getHeroesFromApi(): Single<List<Hero>> {

@@ -9,8 +9,8 @@ import io.reactivex.Completable
 @Dao
 interface HeroDao {
 
-    @Query("SELECT * FROM hero WHERE hero.attribute=:attribute")
-    fun getHeroesByAttribute(attribute: String): LiveData<List<Hero>>
+    @Query("SELECT * FROM hero")
+    fun getHeroes(): LiveData<List<Hero>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllHeroes(heroesList: List<Hero>): Completable

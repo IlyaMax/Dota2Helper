@@ -13,11 +13,11 @@ import io.reactivex.schedulers.Schedulers
 class HeroesViewModel : ViewModel() {
     //    private val heroesData: MutableLiveData<List<Hero.Entity>> = HeroesRepository.getHeroes()
 //    fun getHeroesRepository():LiveData<List<Hero.Entity>> = heroesData
-    private lateinit var heroesData: LiveData<List<Hero>>
-    var loading = MutableLiveData<Boolean>()
+    private lateinit var heroesData:LiveData<List<Hero>>
+    val loading = MutableLiveData<Boolean>()
 
-    fun getHeroesFromDBByAttribute(attribute: String): LiveData<List<Hero>> {
-        heroesData = HeroesRepository.getHeroesFromDBByAttribute(attribute)
+    fun getHeroes(): LiveData<List<Hero>> {
+        heroesData = HeroesRepository.getHeroesFromDB()
         return heroesData
     }
 

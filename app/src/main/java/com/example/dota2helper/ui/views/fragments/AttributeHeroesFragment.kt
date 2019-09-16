@@ -3,6 +3,7 @@ package com.example.dota2helper.ui.views.fragments
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.example.dota2helper.ui.adapters.HeroesRecyclerViewAdapter
 import com.example.dota2helper.ui.viewmodels.HeroesViewModel
 import com.example.dota2helper.R
 import com.example.dota2helper.common.NetworkState
+import com.example.dota2helper.data.entities.Hero
 import kotlinx.android.synthetic.main.attribute_heroes_fragment.*
 
 
@@ -23,6 +25,7 @@ class AttributeHeroesFragment : Fragment() {
 
 
     private lateinit var heroesViewModel: HeroesViewModel
+    private var heroesList:List<Hero>? = null
 
     companion object {
         fun newInstance(attribute: String): AttributeHeroesFragment {
@@ -40,21 +43,19 @@ class AttributeHeroesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        heroesViewModel = ViewModelProviders.of(this).get(HeroesViewModel::class.java)
-        if (NetworkState.isNetworkConnected(context!!)) {
-            heroesViewModel.getHeroesFromAPIAndStore()
-            heroesViewModel.loading.observe(this,Observer{
-                progressBar.visibility = if (it) View.VISIBLE else View.GONE
-                recyclerView.visibility = if (!it) View.VISIBLE else View.GONE
+        recyclerView.layoutManager = GridLayoutManager(context, 3)
+        if (heroesList == null) {
+            heroesViewModel = ViewModelProviders.of(this).get(HeroesViewModel::class.java)
+            heroesViewModel.getHeroes().observe(this, Observer {
+                Log.d("myTag", it.toString())
+                heroesList = it.filter { hero -> hero.attribute == arguments?.getString("attribute")!! }
+                recyclerView.adapter = HeroesRecyclerViewAdapter(heroesList!!)
             })
         }
+        else {
+            recyclerView.adapter = HeroesRecyclerViewAdapter(heroesList!!)
+        }
 
-        heroesViewModel.getHeroesFromDBByAttribute(arguments?.getString("attribute")!!).observe(this, Observer {
-            recyclerView.layoutManager = GridLayoutManager(context, 3)
-            recyclerView.adapter =
-                HeroesRecyclerViewAdapter(it)
-
-        })
     }
 
 }
