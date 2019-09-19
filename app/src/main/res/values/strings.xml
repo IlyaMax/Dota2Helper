@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Dota2Helper</string>
     <string name="roles">Роли</string>
-    <string name="characteristics">Характеристики</string>
     <string name="counter_picks">Контрпики</string>
     <string name="pick_against">Пикайте против</string>
+    <string name="win_rates">Проценты побед</string>
 </resources>

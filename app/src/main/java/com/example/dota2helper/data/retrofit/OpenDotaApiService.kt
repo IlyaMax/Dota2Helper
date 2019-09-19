@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface OpenDotaApiService {
-    @GET("heroes")
+    @GET("heroStats")
     fun getHeroes(): Single<List<Hero>>
 
     companion object Factory {
