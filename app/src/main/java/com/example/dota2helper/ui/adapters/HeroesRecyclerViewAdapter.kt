@@ -13,7 +13,7 @@ import com.example.dota2helper.ui.views.activities.HeroActivity
 import com.squareup.picasso.Picasso
 
 
-class HeroesRecyclerViewAdapter(private var context: Context) :
+class HeroesRecyclerViewAdapter(private val context: Context) :
     BaseRecyclerViewAdapter<Hero, BaseViewHolder<Hero>>(context) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Hero> {
@@ -21,7 +21,7 @@ class HeroesRecyclerViewAdapter(private var context: Context) :
     }
 
     inner class HeroesViewHolder(itemView: View) : BaseViewHolder<Hero>(itemView) {
-        var ivHero: ImageView = itemView.findViewById(R.id.ivHero)
+        private val ivHero: ImageView = itemView.findViewById(R.id.ivHero)
         override fun onBind(item: Hero) {
             ivHero.setOnClickListener {
                 val intent = Intent(this@HeroesRecyclerViewAdapter.context, HeroActivity::class.java)
