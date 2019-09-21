@@ -26,6 +26,7 @@ class AttributeHeroesFragment : Fragment() {
 
     private lateinit var heroesViewModel: HeroesViewModel
     private var heroesList: List<Hero>? = null
+    private lateinit var adapter:HeroesRecyclerViewAdapter
 
     companion object {
         fun newInstance(attribute: String): AttributeHeroesFragment {
@@ -44,15 +45,18 @@ class AttributeHeroesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = GridLayoutManager(context, 3)
+        adapter = HeroesRecyclerViewAdapter(context!!)
+        recyclerView.adapter = adapter
+
         if (heroesList == null) {
             heroesViewModel = ViewModelProviders.of(this).get(HeroesViewModel::class.java)
             heroesViewModel.getHeroes().observe(this, Observer {
                 Log.d("myTag", it.toString())
                 heroesList = it.filter { hero -> hero.attribute == arguments?.getString("attribute")!! }
-                recyclerView.adapter = HeroesRecyclerViewAdapter(heroesList!!)
+                adapter.setItems(heroesList)
             })
         } else {
-            recyclerView.adapter = HeroesRecyclerViewAdapter(heroesList!!)
+            adapter.setItems(heroesList)
         }
 
     }
