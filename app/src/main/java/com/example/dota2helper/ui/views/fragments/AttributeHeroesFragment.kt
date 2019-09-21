@@ -25,7 +25,7 @@ class AttributeHeroesFragment : Fragment() {
 
 
     private lateinit var heroesViewModel: HeroesViewModel
-    private var heroesList:List<Hero>? = null
+    private var heroesList: List<Hero>? = null
 
     companion object {
         fun newInstance(attribute: String): AttributeHeroesFragment {
@@ -51,8 +51,7 @@ class AttributeHeroesFragment : Fragment() {
                 heroesList = it.filter { hero -> hero.attribute == arguments?.getString("attribute")!! }
                 recyclerView.adapter = HeroesRecyclerViewAdapter(heroesList!!)
             })
-        }
-        else {
+        } else {
             recyclerView.adapter = HeroesRecyclerViewAdapter(heroesList!!)
         }
 

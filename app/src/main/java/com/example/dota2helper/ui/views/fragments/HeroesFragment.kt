@@ -33,10 +33,9 @@ class HeroesFragment : Fragment() {
         if (!NetworkState.isNetworkConnected(context!!)) {
             Toast.makeText(context, "No internet found. Showing cached list in the view", Toast.LENGTH_LONG).show()
             setViewPager()
-        }
-        else{
+        } else {
             heroesViewModel.getHeroesFromAPIAndStore()
-            heroesViewModel.loading.observe(this, Observer{
+            heroesViewModel.loading.observe(this, Observer {
                 progressBar.visibility = if (it) View.VISIBLE else View.GONE
                 viewPager.visibility = if (!it) View.VISIBLE else View.GONE
                 if (!it) setViewPager()
@@ -44,7 +43,8 @@ class HeroesFragment : Fragment() {
         }
 
     }
-    private fun setViewPager(){
+
+    private fun setViewPager() {
         viewPager!!.adapter = PageAdapter(fragmentManager, tabs!!.tabCount)
         viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

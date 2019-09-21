@@ -25,7 +25,11 @@ object HeroesRepository {
         return apiService.getHeroes()
     }
 
-    fun saveHeroesToDb(heroes: List<Hero>?):Completable {
+    fun saveHeroesToDb(heroes: List<Hero>?): Completable {
         return App.database.heroDao().insertAllHeroes(heroes!!)
+    }
+
+    fun getHeroById(id: Int): LiveData<Hero> {
+        return App.database.heroDao().getHeroById(id)
     }
 }

@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 class HeroesViewModel : ViewModel() {
     //    private val heroesData: MutableLiveData<List<Hero.Entity>> = HeroesRepository.getHeroes()
 //    fun getHeroesRepository():LiveData<List<Hero.Entity>> = heroesData
-    private lateinit var heroesData:LiveData<List<Hero>>
+    private lateinit var heroesData: LiveData<List<Hero>>
     val loading = MutableLiveData<Boolean>()
 
     fun getHeroes(): LiveData<List<Hero>> {
@@ -21,18 +21,22 @@ class HeroesViewModel : ViewModel() {
         return heroesData
     }
 
+    fun getHeroById(id: Int): LiveData<Hero> {
+        return HeroesRepository.getHeroById(id)
+    }
+
     fun getHeroesFromAPIAndStore() {
         loading.value = true
         HeroesRepository.getHeroesFromApi()
             .subscribeOn(Schedulers.io())
             .subscribe({
-                    HeroesRepository.saveHeroesToDb(it)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { loading.value = false }
-                },{
-                    it.printStackTrace()
-                }
+                HeroesRepository.saveHeroesToDb(it)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { loading.value = false }
+            }, {
+                it.printStackTrace()
+            }
             )
 
     }
