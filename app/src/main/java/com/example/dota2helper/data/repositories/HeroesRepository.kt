@@ -12,6 +12,7 @@ import retrofit2.Response
 import android.os.Handler
 import io.reactivex.Completable
 import io.reactivex.Completable.fromCallable
+import io.reactivex.Observable
 import io.reactivex.Single
 
 
@@ -29,7 +30,7 @@ object HeroesRepository {
         return App.database.heroDao().insertAllHeroes(heroes!!)
     }
 
-    fun getHeroById(id: Int): LiveData<Hero> {
+    fun getHeroById(id: Int): Observable<Hero> {
         return App.database.heroDao().getHeroById(id)
     }
 }

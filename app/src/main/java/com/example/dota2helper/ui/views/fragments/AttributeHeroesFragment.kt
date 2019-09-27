@@ -45,7 +45,7 @@ class AttributeHeroesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = GridLayoutManager(context, 3)
-        adapter = HeroesRecyclerViewAdapter(context!!)
+        adapter = HeroesRecyclerViewAdapter(context!!,true)
         recyclerView.adapter = adapter
 
         if (heroesList == null) {

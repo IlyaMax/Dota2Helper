@@ -14,6 +14,7 @@ class HeroesViewModel : ViewModel() {
     //    private val heroesData: MutableLiveData<List<Hero.Entity>> = HeroesRepository.getHeroes()
 //    fun getHeroesRepository():LiveData<List<Hero.Entity>> = heroesData
     private lateinit var heroesData: LiveData<List<Hero>>
+    private val heroData = MutableLiveData<Hero>()
     val loading = MutableLiveData<Boolean>()
 
     fun getHeroes(): LiveData<List<Hero>> {
@@ -22,7 +23,15 @@ class HeroesViewModel : ViewModel() {
     }
 
     fun getHeroById(id: Int): LiveData<Hero> {
-        return HeroesRepository.getHeroById(id)
+        HeroesRepository.getHeroById(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                heroData.value = it
+            },{
+                it.printStackTrace()
+            })
+        return heroData
     }
 
     fun getHeroesFromAPIAndStore() {
